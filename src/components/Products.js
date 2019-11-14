@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 
 // Components
 import Product from "./Product";
 
 const Products = () => {
-  const { products, addItem } = useContext(ProductContext);
-  console.log(products);
+  const { products, addItem, cart } = useContext(ProductContext);
+  //   console.log(`Products.js: `, products);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <div className="products-container">
       {products.map(product => (
